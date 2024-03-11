@@ -4,13 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Input from '../Input/Input';
 import { emailAction } from '../../redux/actions';
+import { Dispatch } from '../../types/type';
 
 function LoginForm() {
   const [formEmail, setFormEmail] = useState('');
   const [formPassword, setformPassword] = useState('');
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
 
   const isDisable = formPassword.length > 5 && isEmail(formEmail);
 

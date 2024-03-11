@@ -1,10 +1,43 @@
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+
+export type SelectOptionsType = {
+  currencie?: string;
+  payment?: string;
+  expense?: string;
+};
+
+type ExchangeRate = {
+  code: string;
+  codein: string;
+  name: string;
+  high: string;
+  low: string;
+  varBid: string;
+  pctChange: string;
+  bid: string;
+  ask: string;
+  timestamp: string;
+  create_date: string;
+};
+
+export type DataExpenseType = {
+  id: number;
+  value: string;
+  description: string;
+  currency: string;
+  method: string;
+  tag: string;
+  exchangeRates: Record<string, ExchangeRate>;
+};
+
 export type InitialStateType = {
   user: {
     email: string;
   };
   wallet: {
-    currencies: never[];
-    expenses: never[];
+    currencies: string[];
+    expenses: DataExpenseType[];
     editor: boolean;
     idToEdit: number;
   };
@@ -16,8 +49,15 @@ export type UserInitialStatetype = {
 
 export type WalletInitalStateType = {
 
-  currencies: never[];
-  expenses: never[];
+  currencies: string[];
+  expenses: DataExpenseType[];
   editor: boolean;
   idToEdit: number;
 };
+
+export type ReduxState = {
+  isFetching: boolean,
+  errorMessage: string,
+};
+
+export type Dispatch = ThunkDispatch<ReduxState, null, AnyAction>;
