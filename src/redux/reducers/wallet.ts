@@ -1,6 +1,10 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-
-import { ActionType } from '../../types/type';
+export type ActionType = {
+  type: string;
+  payload: {
+    email: string;
+  }
+};
 
 const walletInitialState = {
   currencies: [], // array de string

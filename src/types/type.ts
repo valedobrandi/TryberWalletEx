@@ -21,5 +21,3 @@ export type WalletInitalStateType = {
   editor: boolean;
   idToEdit: number;
 };
-
-

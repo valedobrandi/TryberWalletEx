@@ -1,13 +1,11 @@
 import { writeEmail } from '../actions';
-
+// Esse reducer será responsável por tratar as informações da pessoa usuária
 export type ActionType = {
   type: string;
   payload: {
     email: string;
   }
 };
-
-// Esse reducer será responsável por tratar as informações da pessoa usuária
 const userInitialState = {
   email: '', // string que armazena o e-mail da pessoa usuária
 };
