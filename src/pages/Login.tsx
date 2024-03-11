@@ -1,5 +1,12 @@
+import LoginForm from '../components/LoginForm';
+
 function Login() {
-  return <div>Login</div>;
+  return (
+    <div>
+      <h1>TryberWallet</h1>
+      <LoginForm />
+    </div>
+  );
 }
 
 export default Login;
