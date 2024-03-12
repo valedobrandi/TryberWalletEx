@@ -4,6 +4,7 @@ import Input from '../Input/Input';
 import Select from '../Select/Select';
 import { Dispatch, InitialStateType } from '../../types/type';
 import { currenciesAction, fetchCurrencies } from '../../redux/actions';
+import Table from '../Table';
 
 const methods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
@@ -54,42 +55,45 @@ function WalletForm() {
   }
 
   return (
-    <form action="" onSubmit={ handleSubmit }>
-      <Input
-        test="value-input"
-        field="Despesa"
-        onSetChange={ setDespesa }
-        setChange={ despesa }
-      />
-      <Input
-        test="description-input"
-        field="Descrição"
-        onSetChange={ setDescrição }
-        setChange={ descrição }
-      />
-      <Select
-        test="currency-input"
-        options={ wallet.currencies }
-        onHandleChange={ handleChange }
-        optionType="currencie"
-        selectOptions={ selectOptions.currencie }
-      />
-      <Select
-        test="method-input"
-        options={ methods }
-        onHandleChange={ handleChange }
-        optionType="method"
-        selectOptions={ selectOptions.method }
-      />
-      <Select
-        test="tag-input"
-        options={ tags }
-        onHandleChange={ handleChange }
-        optionType="tag"
-        selectOptions={ selectOptions.tag }
-      />
-      <button>Adicionar Despesas</button>
-    </form>
+    <div>
+      <form action="" onSubmit={ handleSubmit }>
+        <Input
+          test="value-input"
+          field="Despesa"
+          onSetChange={ setDespesa }
+          setChange={ despesa }
+        />
+        <Input
+          test="description-input"
+          field="Descrição"
+          onSetChange={ setDescrição }
+          setChange={ descrição }
+        />
+        <Select
+          test="currency-input"
+          options={ wallet.currencies }
+          onHandleChange={ handleChange }
+          optionType="currencie"
+          selectOptions={ selectOptions.currencie }
+        />
+        <Select
+          test="method-input"
+          options={ methods }
+          onHandleChange={ handleChange }
+          optionType="method"
+          selectOptions={ selectOptions.method }
+        />
+        <Select
+          test="tag-input"
+          options={ tags }
+          onHandleChange={ handleChange }
+          optionType="tag"
+          selectOptions={ selectOptions.tag }
+        />
+        <button>Adicionar Despesas</button>
+      </form>
+      <Table />
+    </div>
   );
 }
 

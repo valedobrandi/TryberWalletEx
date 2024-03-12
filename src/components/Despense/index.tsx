@@ -13,16 +13,17 @@ function Despense({ expense }: { expense: DataExpenseType }) {
     dispatch(deleteAction(id));
   }
   return (
-    <>
+    <tr>
       <td>{`${description}`}</td>
       <td>{`${tag}`}</td>
       <td>{`${method}`}</td>
-      <td>{`${value}`}</td>
+      <td>{`${Number(value).toFixed(2)}`}</td>
       <td>{`${currencyName}`}</td>
+      <td>{`${Number(exchangeRates[currency].ask).toFixed(2)}`}</td>
       <td>{`${convertValue.toFixed(2)}`}</td>
       <td>Real</td>
-      <button data-testid="delete-btn" onClick={ handleClick }>X</button>
-    </>
+      <td><button data-testid="delete-btn" onClick={ handleClick }>X</button></td>
+    </tr>
   );
 }
 

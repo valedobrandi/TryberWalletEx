@@ -20,10 +20,8 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {expenses.map((expense) => (
-            <Despense key={ expense.id } expense={ expense } />))}
-        </tr>
+        {expenses.map((expense) => (
+          <Despense key={ expense.id } expense={ expense } />))}
       </tbody>
     </table>
   );
