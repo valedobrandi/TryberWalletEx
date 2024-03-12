@@ -1,5 +1,5 @@
 import { DataExpenseType } from '../../types/type';
-import { successful, updateCurrencies } from '../actions';
+import { deleteExpense, successful, updateCurrencies } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 export type ActionType = {
@@ -8,14 +8,15 @@ export type ActionType = {
     email: string;
     currencies: string[]
     expenses: DataExpenseType
+    id: number
   }
 };
 
 const walletInitialState = {
-  currencies: [], // array de string
-  expenses: [], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
-  editor: false, // valor booleano que indica se uma despesa está sendo editada
-  idToEdit: 0, // valor numérico que armazena o id da despesa que está sendo editada
+  currencies: [],
+  expenses: [],
+  editor: false,
+  idToEdit: 0,
 };
 const walletReducer = (state = walletInitialState, action: ActionType) => {
   switch (action.type) {
@@ -25,6 +26,11 @@ const walletReducer = (state = walletInitialState, action: ActionType) => {
     case successful:
       return { ...state, expenses: [...state.expenses, action.payload.expenses] };
 
+    case deleteExpense:
+      return {
+        ...state,
+        expenses: state.expenses.filter(({ id }) => id !== action.payload.id),
+      };
     default:
       return state;
   }

@@ -7,6 +7,14 @@ export const updateCurrencies = 'UPDATE_CURRENCIES';
 export const started = 'REQUEST_STARTED';
 export const successful = 'REQUEST_SUCCESSFUL';
 export const failed = 'REQUEST_FAILED';
+export const deleteExpense = 'DELETE_EXPENSE';
+
+export function deleteAction(id: number) {
+  return {
+    type: deleteExpense,
+    payload: { id },
+  };
+}
 
 export function currenciesAction(data: string[]) {
   return {

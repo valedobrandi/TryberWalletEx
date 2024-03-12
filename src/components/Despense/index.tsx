@@ -1,9 +1,17 @@
+import { useDispatch } from 'react-redux';
 import { DataExpenseType } from '../../types/type';
+import { deleteAction } from '../../redux/actions';
 
 function Despense({ expense }: { expense: DataExpenseType }) {
-  const { value, description, currency, method, tag, exchangeRates } = expense;
+  const dispatch = useDispatch();
+  const { id, value, description, currency, method, tag, exchangeRates } = expense;
+
   const convertValue = Number(value) * Number(exchangeRates[currency].ask);
   const currencyName = exchangeRates[currency].name;
+
+  function handleClick() {
+    dispatch(deleteAction(id));
+  }
   return (
     <>
       <td>{`${description}`}</td>
@@ -13,7 +21,7 @@ function Despense({ expense }: { expense: DataExpenseType }) {
       <td>{`${currencyName}`}</td>
       <td>{`${convertValue.toFixed(2)}`}</td>
       <td>Real</td>
-      <button>Editar/Excluir</button>
+      <button data-testid="delete-btn" onClick={ handleClick }>X</button>
     </>
   );
 }
