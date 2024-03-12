@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Input from '../Input/Input';
 import Select from '../Select/Select';
 import { Dispatch, InitialStateType } from '../../types/type';
-import { currenciesAction, fetchCurrencies } from '../../redux/actions';
+import { currenciesAction, editAction, fetchCurrencies } from '../../redux/actions';
 import Table from '../Table';
 
 const methods = ['Dinheiro', 'Cartão de crédito', 'Cartão de débito'];
 const tags = ['Alimentação', 'Lazer', 'Trabalho', 'Transporte', 'Saúde'];
 
 function WalletForm() {
+  const { wallet } = useSelector((state: InitialStateType) => state);
+  const filter = wallet.expenses.find(({ id }) => id === wallet.idToEdit);
+  const isValid = filter && wallet.editor;
   const [despesa, setDespesa] = useState('');
   const [descrição, setDescrição] = useState('');
   const [selectOptions, setSelectOptions] = useState(
@@ -20,15 +23,26 @@ function WalletForm() {
     },
   );
 
-  const { wallet } = useSelector((state: InitialStateType) => state);
+  useEffect(() => {
+    if (wallet.editor && filter) {
+      setDespesa(filter.value);
+      setDescrição(filter.description);
+      setSelectOptions({
+        currencie: filter.currency,
+        method: filter.method,
+        tag: filter.tag,
+      });
+    }
+  }, [wallet.editor]);
+
   const dispatch: Dispatch = useDispatch();
 
   useEffect(() => {
     async function fetchData() {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
       const data = await response.json();
-      const filter = [...Object.keys(data)].filter((key) => key !== 'USDT');
-      dispatch(currenciesAction(filter));
+      const filterData = [...Object.keys(data)].filter((key) => key !== 'USDT');
+      dispatch(currenciesAction(filterData));
     }
     fetchData();
   }, []);
@@ -41,17 +55,27 @@ function WalletForm() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const dataExpense = {
-      id: wallet.expenses.length || 0,
+      id: isValid ? filter.id : wallet.expenses.length || 0,
       value: despesa,
       description: descrição,
       currency: selectOptions.currencie,
       method: selectOptions.method,
       tag: selectOptions.tag,
-      exchangeRates: {},
+      exchangeRates: isValid ? filter.exchangeRates : {},
     };
-    dispatch(fetchCurrencies(dataExpense));
-    setDespesa('');
-    setDescrição('');
+
+    switch (wallet.editor) {
+      case true:
+        dispatch(editAction(dataExpense));
+        setDespesa('');
+        setDescrição('');
+        return;
+
+      default:
+        dispatch(fetchCurrencies(dataExpense));
+        setDespesa('');
+        setDescrição('');
+    }
   }
 
   return (
@@ -90,7 +114,7 @@ function WalletForm() {
           optionType="tag"
           selectOptions={ selectOptions.tag }
         />
-        <button>Adicionar Despesas</button>
+        <button>{wallet.editor ? 'Editar Despesas' : 'Adicionar Despesas'}</button>
       </form>
       <Table />
     </div>

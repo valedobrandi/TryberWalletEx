@@ -4,6 +4,7 @@ import Despense from '../Despense';
 
 function Table() {
   const { expenses } = useSelector((state: InitialStateType) => state.wallet);
+
   return (
     <table>
       <thead>

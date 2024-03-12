@@ -8,6 +8,22 @@ export const started = 'REQUEST_STARTED';
 export const successful = 'REQUEST_SUCCESSFUL';
 export const failed = 'REQUEST_FAILED';
 export const deleteExpense = 'DELETE_EXPENSE';
+export const editExpense = 'EDIT_EXPENSE';
+export const editId = 'EDIT_ID';
+
+export function editIdAction(id: number) {
+  return {
+    type: editId,
+    payload: { idToEdit: id },
+  };
+}
+
+export function editAction(dataExpense: DataExpenseType) {
+  return {
+    type: editExpense,
+    payload: { expenses: dataExpense },
+  };
+}
 
 export function deleteAction(id: number) {
   return {
