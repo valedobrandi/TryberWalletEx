@@ -1,14 +1,8 @@
 import { useSelector } from 'react-redux';
-import { InitialStateType,
-  UserInitialStatetype, WalletInitalStateType } from '../../types/type';
-
-type ReducerState = {
-  user: UserInitialStatetype;
-  Wallet: WalletInitalStateType;
-};
+import { InitialStateType } from '../../types/type';
 
 function Header() {
-  const { user } = useSelector((state: ReducerState) => state);
+  const { user } = useSelector((state: InitialStateType) => state);
   const { wallet } = useSelector((state: InitialStateType) => state);
 
   const totalExpenses = wallet.expenses.reduce((prev, cur) => {

@@ -8,17 +8,8 @@ export type SelectOptionsType = {
 };
 
 type ExchangeRate = {
-  code: string;
-  codein: string;
-  name: string;
-  high: string;
-  low: string;
-  varBid: string;
-  pctChange: string;
-  bid: string;
   ask: string;
-  timestamp: string;
-  create_date: string;
+  name: string;
 };
 
 export type DataExpenseType = {
