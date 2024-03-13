@@ -1,4 +1,4 @@
-import { DataExpenseType } from '../../types/type';
+import { DataExpenseType, WalletInitalStateType } from '../../types/type';
 import { deleteExpense, editExpense,
   editId, successful, updateCurrencies } from '../actions';
 
@@ -14,7 +14,7 @@ export type ActionType = {
   }
 };
 
-const walletInitialState = {
+const walletInitialState: WalletInitalStateType = {
   currencies: [],
   expenses: [],
   editor: false,

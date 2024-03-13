@@ -82,12 +82,14 @@ function WalletForm() {
     <div>
       <form action="" onSubmit={ handleSubmit }>
         <Input
+          name="Despesa"
           test="value-input"
           field="Despesa"
           onSetChange={ setDespesa }
           setChange={ despesa }
         />
         <Input
+          name="Descrição"
           test="description-input"
           field="Descrição"
           onSetChange={ setDescrição }

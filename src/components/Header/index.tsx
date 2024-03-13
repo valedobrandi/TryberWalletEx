@@ -5,10 +5,14 @@ function Header() {
   const { user } = useSelector((state: InitialStateType) => state);
   const { wallet } = useSelector((state: InitialStateType) => state);
 
-  const totalExpenses = wallet.expenses.reduce((prev, cur) => {
-    const sum = Number(cur.value) * Number(cur.exchangeRates[cur.currency].ask);
-    return prev + sum;
-  }, 0);
+  const isValid = wallet.expenses.length > 0;
+
+  const totalExpenses = isValid
+    ? wallet.expenses.reduce((prev, cur) => {
+      const sum = Number(cur.value) * Number(cur.exchangeRates[cur.currency].ask);
+      return prev + sum;
+    }, 0)
+    : 0;
 
   return (
     <div>

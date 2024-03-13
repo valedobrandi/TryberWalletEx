@@ -50,7 +50,7 @@ function requestStarted() {
   return { type: started };
 }
 
-function requestSuccessful(data: DataExpenseType) {
+export function requestSuccessful(data: DataExpenseType) {
   return { type: successful, payload: { expenses: data } };
 }
 
