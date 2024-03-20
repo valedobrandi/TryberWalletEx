@@ -1,6 +1,6 @@
 import { DataExpenseType, WalletInitalStateType } from '../../types/type';
 import { deleteExpense, editExpense,
-  editId, successful, updateCurrencies } from '../actions';
+  editId, started, successful, updateCurrencies } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 export type ActionType = {
@@ -19,15 +19,22 @@ const walletInitialState: WalletInitalStateType = {
   expenses: [],
   editor: false,
   idToEdit: 0,
+  isFetching: true,
 };
 const walletReducer = (state = walletInitialState, action: ActionType) => {
   switch (action.type) {
     case updateCurrencies:
       return { ...state, currencies: action.payload.currencies };
 
-    case successful:
-      return { ...state, expenses: [...state.expenses, action.payload.expenses] };
+    case started:
+      return { ...state, isFetching: false };
 
+    case successful:
+      return {
+        ...state,
+        isFetching: true,
+        expenses: [...state.expenses, action.payload.expenses],
+      };
     case deleteExpense:
       return {
         ...state,

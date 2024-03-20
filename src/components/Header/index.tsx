@@ -1,4 +1,9 @@
 import { useSelector } from 'react-redux';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import { InitialStateType } from '../../types/type';
 
 function Header() {
@@ -15,12 +20,24 @@ function Header() {
     : 0;
 
   return (
-    <div>
-      <h1>Wallet</h1>
-      <p data-testid="email-field">{user.email}</p>
-      <p data-testid="total-field">{totalExpenses.toFixed(2)}</p>
-      <p data-testid="header-currency-field">BRL</p>
-    </div>
+    <Box sx={ { flexGrow: 1 } }>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h4" component="h4" sx={ { flexGrow: 1 } }>
+            Wallet Expense
+          </Typography>
+          <Typography variant="h6" component="p" ml="70%" mr="20px">
+            {totalExpenses.toFixed(2)}
+          </Typography>
+          <Typography variant="h6" component="p" mr="10px" sx={ { flexGrow: 1 } }>
+            BRL
+          </Typography>
+          <Typography variant="h6" component="p" mr={ 2 }>
+            {user.email}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </Box>
   );
 }
 

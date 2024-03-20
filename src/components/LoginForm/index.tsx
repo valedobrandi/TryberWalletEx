@@ -2,9 +2,11 @@ import { useState } from 'react';
 import isEmail from 'validator/lib/isEmail';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
 import Input from '../Input/Input';
 import { emailAction } from '../../redux/actions';
 import { Dispatch } from '../../types/type';
+import { FormArea } from './styled';
 
 function LoginForm() {
   const [formEmail, setFormEmail] = useState('');
@@ -15,15 +17,17 @@ function LoginForm() {
 
   const isDisable = formPassword.length > 5 && isEmail(formEmail);
 
-  function submitForm(event: React.FormEvent<HTMLFormElement>) {
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    console.log('aqui');
+
     event.preventDefault();
     dispatch(emailAction(formEmail));
     setFormEmail('');
     navigate('/carteira');
-  }
+  };
 
   return (
-    <form action="" onSubmit={ submitForm }>
+    <FormArea action="" onSubmit={ submitForm }>
       <Input
         test="email-input"
         field="Email"
@@ -37,8 +41,8 @@ function LoginForm() {
         setChange={ formPassword }
         inputField="password"
       />
-      <button disabled={ !isDisable }>Entrar</button>
-    </form>
+      <Button variant="contained" type="submit" disabled={ !isDisable }>Entrar</Button>
+    </FormArea>
   );
 }
 

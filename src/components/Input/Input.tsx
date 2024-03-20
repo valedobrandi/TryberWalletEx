@@ -1,3 +1,5 @@
+import { TextField } from '@mui/material';
+
 type InputType = {
   field: string;
   onSetChange: (data: string) => void
@@ -10,15 +12,16 @@ type InputType = {
 export default function Input({
   field, onSetChange, setChange, inputField = 'text', test = '', name = '' }: InputType) {
   return (
-    <>
-      <label htmlFor={ name }>{field}</label>
-      <input
-        id={ name }
+    <div>
+      <TextField
+        name={ name }
+        label={ field }
+        variant="standard"
         value={ setChange }
         onChange={ (event) => onSetChange(event.target.value) }
         type={ inputField }
         data-testid={ test }
       />
-    </>
+    </div>
   );
 }

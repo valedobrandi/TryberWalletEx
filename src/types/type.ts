@@ -31,6 +31,7 @@ export type InitialStateType = {
     expenses: DataExpenseType[];
     editor: boolean;
     idToEdit: number;
+    isFetching: boolean
   };
 };
 
@@ -44,6 +45,7 @@ export type WalletInitalStateType = {
   expenses: DataExpenseType[];
   editor: boolean;
   idToEdit: number;
+  isFetching: boolean;
 };
 
 export type ReduxState = {

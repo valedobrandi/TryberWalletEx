@@ -186,5 +186,7 @@ describe('Pagina "Wallet" renderiza as informações corretamente.', async () =>
 
     const btnDeletee = screen.getByRole('button', { name: /excluir/i });
     await userEvent.click(btnDeletee);
+
+    expect(store.getState().wallet.expenses).toHaveLength(0);
   });
 });
